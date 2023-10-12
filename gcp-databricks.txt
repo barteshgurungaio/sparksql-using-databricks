@@ -1,0 +1,85 @@
+Create virtual environment & install databricks cli
+===================================================
+$ python -m venv dd-venv
+
+$ pip install databricks-cli
+
+$ databricks --version
+
+Connect to workspace using token
+=================================
+$ databricks configure --host https://8465189341973177.7.gcp.databricks.com --token --profile analytiqsgcp
+Token: dapi42576e8dede5dafb8ab3f0358c98dde3 
+
+$ databricks fs ls --profile analytiqsgcp
+databricks-datasets
+databricks-results
+
+
+Overview of databricks cli
+===========================
+$ databricks --help
+Commands:
+  clusters          Utility to interact with Databricks clusters.
+  fs                Utility to interact with DBFS.
+  jobs              Utility to interact with jobs.
+  secrets           Utility to interact with Databricks secret API.
+
+$ databricks clusters --help 
+
+$ databricks clusters list --profile analytiqsgcp
+
+$ databricks clusters start --cluster-id 1002-004004-5hscee6e --profile analytiqsgcp
+
+$ databricks clusters list --profile analytiqsgcp
+
+$ databricks clusters delete --cluster-id 1002-004004-5hscee6e --profile analytiqsgcp
+
+$ databricks clusters list --profile analytiqsgcp
+
+
+Setup data repository for data sets
+==================================
+$ git clone https://github.com/dgadiraju/data.git
+
+
+Setup data sets in DBFS using Databricks CLI Commands
+=====================================================
+$ databricks fs ls --profile analytiqsgcp
+
+$ databricks fs --help
+Commands:
+  cat        Show the contents of a file.
+  configure  Configures host and authentication info for the CLI.
+  cp         Copy files to and from DBFS.
+  ls         List files in DBFS.
+  mkdirs     Make directories in DBFS.
+  mv         Moves a file between two DBFS paths.
+  rm         Remove files from dbfs.
+
+$ databricks fs cp data/retail_db dbfs:/public/retail_db --recursive --profile analytiqsgcp
+
+$ databricks fs cp data/retail_db_json dbfs:/public/retail_db_json --recursive --profile analytiqsgcp
+
+
+$ databricks fs ls dbfs:/public/ --profile analytiqsgcp
+retail_db
+
+$ databricks fs ls dbfs:/public/retail_db --profile analytiqsgcp
+categories
+customers
+departments
+order_items
+orders
+products
+
+=====================
+
+Spark SQL pre-defined functions
+
+SHOW FUNCTION
+
+DESCRIBE FUNCTION substr
+
+
+
